@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   User,
 } from "firebase/auth";
 import { useState } from "react";
@@ -39,7 +40,19 @@ const useAuth = () => {
       })
       .finally(() => setLoading(false));
   };
-  const logout = () => {};
+  const logout = () => {
+    setLoading(true);
+    signOut(auth)
+      .then(() => {
+        setUser({} as User);
+        navigate("/auth");
+      })
+      .catch((err) => {
+        const result = err as Error;
+        setError(result.message);
+      })
+      .finally(() => setLoading(false));
+  };
   return { signIn, signUp, logout, user, isLoading, error };
 };
 

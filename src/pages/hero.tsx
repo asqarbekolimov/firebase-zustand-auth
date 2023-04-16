@@ -1,7 +1,12 @@
 import React from "react";
+import { Navbar } from "../components";
 
 const Hero = () => {
-  return <div>Hero</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 export default Hero;
